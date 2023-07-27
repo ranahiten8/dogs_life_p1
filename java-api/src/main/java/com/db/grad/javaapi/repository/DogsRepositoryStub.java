@@ -5,6 +5,7 @@ import com.db.grad.javaapi.model.Dog;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DogsRepositoryStub implements DogsRepository {
     private ArrayList<Dog> itsDogs = new ArrayList<>();
 
