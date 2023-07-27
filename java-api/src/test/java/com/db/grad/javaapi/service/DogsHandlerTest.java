@@ -36,4 +36,26 @@ public class DogsHandlerTest {
     public void add_several_dogs_return_number_of_dogs_match_number_added() {
         
     }
+
+    @Test
+    void delete_dog() {
+        //arrange
+        Dog dogToRemove = new Dog();
+        dogToRemove.setId(1); dogToRemove.setName("Frank");
+        DogsRepositoryStub cut = new DogsRepositoryStub();
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        cut.save( theDog );
+        theDog = new Dog();
+        theDog.setName("Penny");
+        cut.save( theDog );
+
+        //act
+        cut.delete(dogToRemove);
+        Dog actualDog = cut.findById(1);
+
+        // assert
+        assertNull( actualDog );
+
+    }
 }
