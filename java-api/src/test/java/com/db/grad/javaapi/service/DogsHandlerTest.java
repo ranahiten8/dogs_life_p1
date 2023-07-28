@@ -69,4 +69,22 @@ public class DogsHandlerTest {
         assertNull( actualDog );
 
     }
+
+    @Test
+    public void get_dog_by_id_valid()
+    {
+        DogHandler cut = new DogHandler(itsDogRepo);
+
+        Dog theDog = new Dog();
+        cut.addDog(theDog);
+
+        theDog = new Dog();
+        long uniqueId = cut.addDog( theDog );
+        Dog expectedDog = theDog;
+        theDog = new Dog();
+
+        cut.addDog( theDog );
+        Dog actualResult = cut.getDogById( uniqueId );
+        assertEquals( expectedDog.getId(), actualResult.getId() );
+    }
 }
