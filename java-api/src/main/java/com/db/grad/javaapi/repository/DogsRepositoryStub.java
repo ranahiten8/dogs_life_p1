@@ -72,13 +72,13 @@ public class DogsRepositoryStub implements DogsRepository {
     }
 
     @Override
-    public  long count()
+    public long count()
     {
         return this.itsDogs.size();
     }
 
     @Override
-    public  boolean existsById( long id )
+    public boolean existsById( long id )
     {
         boolean result = false;
 

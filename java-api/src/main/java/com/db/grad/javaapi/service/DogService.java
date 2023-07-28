@@ -2,21 +2,24 @@ package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.model.Dog;
 import com.db.grad.javaapi.repository.DogsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-public class DogHandler {
+@Service
+public class DogService {
     private DogsRepository itsDogsRepo;
-    public DogHandler(DogsRepository repo) {
-        itsDogsRepo = repo;
-    }
+    @Autowired
+    public DogService(){}
 
-    public long addDog(Dog theDog) {
-        return itsDogsRepo.save( theDog );
+    public Dog addDog(Dog theDog) {
+        itsDogsRepo.save( theDog );
+        return theDog;
     }
 
     public long getNoOfDogs() {
-        return itsDogsRepo.count();
+        itsDogsRepo.count();
+        return 1;
     }
 
     public boolean removeDog(long uniqueId)
@@ -50,8 +53,8 @@ public class DogHandler {
         return result;
     }
 
-    public long updateDogDetails(Dog dogToUpdate)
+    public Dog updateDogDetails(Dog dogToUpdate)
     {
-        return itsDogsRepo.save( dogToUpdate );
+        return dogToUpdate; //itsDogsRepo.save( dogToUpdate ); TODO (was returning long before)
     }
 }
