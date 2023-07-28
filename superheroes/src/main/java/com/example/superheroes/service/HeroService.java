@@ -18,7 +18,7 @@ public class HeroService {
         return heroRepository.findHeroesNameStartingWithLetter(letterParam);
     }
 
-    public List<Hero> findAll(){
+    public List<Hero> getAllHeroes(){
         return heroRepository.findAll();
     }
 
