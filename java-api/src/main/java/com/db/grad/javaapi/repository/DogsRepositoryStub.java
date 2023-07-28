@@ -92,7 +92,7 @@ public class DogsRepositoryStub implements DogsRepository {
     }
 
     @Override
-    public  void    deleteAll()
+    public void deleteAll()
     {
         itsDogs.clear();
     }
