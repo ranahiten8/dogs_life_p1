@@ -34,21 +34,25 @@ public class DogsHandlerTest {
 
     @Test
     public void add_several_dogs_return_number_of_dogs_match_number_added() {
+        //arrange
         DogHandler cut = new DogHandler(itsDogRepo);
         Dog dog1 = new Dog();
         Dog dog2 = new Dog();
         Dog dog3 = new Dog();
-
         cut.addDog(dog1);
         cut.addDog(dog2);
         cut.addDog(dog3);
 
         int expectedResult =3;
+
+        //act
         long actualResult = cut.getNoOfDogs();
+
+        //assert
         assertEquals(expectedResult, actualResult);
     }
 
-    @Test
+    @Test//TODO there is no function implemented in the DogHandler()
     void delete_dog() {
         //arrange
         Dog dogToRemove = new Dog();
@@ -67,24 +71,45 @@ public class DogsHandlerTest {
 
         // assert
         assertNull( actualDog );
-
     }
 
     @Test
     public void get_dog_by_id_valid()
     {
+        //arrange
         DogHandler cut = new DogHandler(itsDogRepo);
-
         Dog theDog = new Dog();
         cut.addDog(theDog);
-
         theDog = new Dog();
         long uniqueId = cut.addDog( theDog );
         Dog expectedDog = theDog;
         theDog = new Dog();
 
+        //act
         cut.addDog( theDog );
         Dog actualResult = cut.getDogById( uniqueId );
+
+        //assert
         assertEquals( expectedDog.getId(), actualResult.getId() );
+    }
+
+    @Test
+    public void get_valid_updated_DogDetails() {
+        //arrange
+        DogHandler cut = new DogHandler( itsDogRepo );
+        Dog theDog = new Dog();
+        theDog.setName("Bruno");
+        theDog.setId(001);
+        cut.addDog(theDog);
+
+        long expectedResultId = 002;
+
+        //act
+        long actualResult = cut.updateDogDetails(theDog, 002);
+
+        //assert
+        assertEquals(expectedResultId, actualResult);
+
+
     }
 }

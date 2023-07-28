@@ -20,4 +20,9 @@ public class DogHandler {
     public Dog getDogById(long dogId){
         return itsDogsRepo.findById(dogId);
     }
+
+    public long updateDogDetails(Dog theDog, long id) {
+        theDog.setId(id);
+        return theDog.getId();
+    }
 }
