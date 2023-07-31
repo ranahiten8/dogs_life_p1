@@ -2,44 +2,60 @@ package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.model.Dog;
 import com.db.grad.javaapi.repository.DogsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.db.grad.javaapi.service.IDogsService;
 
 import java.util.List;
-@Service
-public class DogService {
+import java.util.Optional;
+
+public class DogHandler implements IDogsService
+{
     private DogsRepository itsDogsRepo;
-    @Autowired
-    public DogService(){}
 
-    public Dog addDog(Dog theDog) {
-        itsDogsRepo.save( theDog );
-        return theDog;
+    public DogHandler( DogsRepository dogRepo )
+    {
+        itsDogsRepo = dogRepo;
     }
 
-    public long getNoOfDogs() {
-        itsDogsRepo.count();
-        return 1;
+    @Override
+    public List<Dog> getAllDogs()
+    {
+        return itsDogsRepo.findAll();
     }
 
+    @Override
+    public Dog addDog(Dog theDog)
+    {
+        return itsDogsRepo.save( theDog );
+    }
+
+    @Override
+    public long getNoOfDogs()
+    {
+        return itsDogsRepo.count();
+    }
+
+    @Override
     public boolean removeDog(long uniqueId)
     {
         boolean result = false;
 
-        Dog theDog = itsDogsRepo.findById(uniqueId);
-        if(theDog != null)
+        Optional<Dog> theDog = itsDogsRepo.findById(uniqueId);
+        if(theDog.isPresent())
         {
-            result = itsDogsRepo.delete(theDog);
+            itsDogsRepo.delete(theDog.get());
+            result = true;
         }
 
         return  result;
     }
 
+    @Override
     public Dog getDogById(long uniqueId)
     {
-        return itsDogsRepo.findById(uniqueId);
+        return itsDogsRepo.findById(uniqueId).get();
     }
 
+    @Override
     public Dog getDogByName(String dogsName )
     {
         Dog dogToFind = new Dog();
@@ -53,8 +69,9 @@ public class DogService {
         return result;
     }
 
+    @Override
     public Dog updateDogDetails(Dog dogToUpdate)
     {
-        return dogToUpdate; //itsDogsRepo.save( dogToUpdate ); TODO (was returning long before)
+        return itsDogsRepo.save( dogToUpdate );
     }
 }
