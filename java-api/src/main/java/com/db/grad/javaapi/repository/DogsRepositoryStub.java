@@ -42,6 +42,8 @@ public class DogsRepositoryStub implements DogsRepository{
         return result;
     }
 
+
+
     @Override
     public long save(Dog aDog) {
         Dog retrievedDog = null;

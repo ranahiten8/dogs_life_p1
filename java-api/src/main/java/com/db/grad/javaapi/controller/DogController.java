@@ -9,12 +9,14 @@ import java.util.List;
 
 @RestController
 public class DogController {
-  private DogService itsDogService;
+  private DogService dogsService;
   @GetMapping("/")
   public String getWelcome() {
     return "Dogs API is up and running!";
   }
 
   @GetMapping("/alldogs")
-  public List<Dog> getAllDogs(){return itsDogService.getAllDogs();}
+  public List <Dog> getAllDogs() {
+    return dogsService.getAllDogs();
+  }
 }
