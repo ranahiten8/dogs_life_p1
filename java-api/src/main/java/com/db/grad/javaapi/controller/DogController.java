@@ -25,26 +25,24 @@ public class DogController {
   public String getWelcome() {
     return "Dogs API is up and running!";
   }
-
   @GetMapping("/dogs")
   public List<Dog> getAllDogs() {
     return dogService.getAllDogs();
   }
-
-  @GetMapping("/NoOfDogs")
+  @GetMapping("/dogs/count")
   public long getNoOfDogs() {
     return dogService.getNoOfDogs();
   }
-
   @GetMapping("/dogs/name/{name}")
   public Dog getDogByName(@PathVariable(value = "name") String name) {
     return dogService.getDogByName(name);
   }
-
   @GetMapping("/dogs/id/{id}")
   public Dog getDogById(@PathVariable(value = "id") Long id) {
     return dogService.getDogById(id);
   }
+
+
   @PostMapping("/dogs")
   public Dog createDog(@Valid @RequestBody Dog dog) {
     return dogService.addDog(dog);

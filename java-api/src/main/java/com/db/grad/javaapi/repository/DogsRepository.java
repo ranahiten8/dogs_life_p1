@@ -19,7 +19,7 @@ public interface DogsRepository extends JpaRepository<Dog, Long> {
     @Query(nativeQuery = true, value = "select * from dogs where dog_id = :id")
     Dog findById(long id);
 
-    @Query(nativeQuery = true, value = "select * from dogs where dog_id = :id")
+    @Query(nativeQuery = true, value = "select count(dog_id) from dogs")
     long count();
 
     //    @Query(nativeQuery = true, value = "delete from dogs where name = :theDog")
